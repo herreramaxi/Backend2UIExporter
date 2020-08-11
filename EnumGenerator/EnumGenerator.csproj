@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<DotNetCliToolReference Include="dotnet-t4-project-tool" Version="2.0.5" />
+		<PackageReference Include="Mono.TextTemplating" Version="2.0.5" />
+		<TextTemplate Include="**\*.tt" />
+		<Generated Include="**\*.Generated.cs" />
+	</ItemGroup>
+	
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+	<Target Name="TextTemplateTransform" BeforeTargets="BeforeBuild">
+		<Exec WorkingDirectory="$(ProjectDir)" Command="dotnet t4 %(TextTemplate.Identity) -c $(RootNameSpace).%(TextTemplate.Filename) -o %(TextTemplate.Filename).Generated.cs" />
+	</Target>
+
+	<Target Name="TextTemplateClean" AfterTargets="Clean">
+		<Delete Files="@(Generated)" />
+	</Target>
+</Project>

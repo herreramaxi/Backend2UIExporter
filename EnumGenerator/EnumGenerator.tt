@@ -1,0 +1,29 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Reflection" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#
+var enumTypes = new List<Type>();
+_assemblies.ForEach(x => enumTypes.AddRange(x.GetTypes().Where(x => x.IsEnum)));
+         
+foreach (var enumType in enumTypes)
+{   
+    WriteLine($"enum {enumType.Name}");
+    WriteLine("{");
+
+    var enumFields = enumType.GetFields().Where(x => x.IsLiteral);
+
+    foreach (var fieldInfo in enumFields)
+    {
+        var name = fieldInfo.Name;
+        var value = fieldInfo.GetRawConstantValue();
+
+        WriteLine($"{name}={value},");
+    }
+
+    WriteLine("}");
+    WriteLine("");
+}
+#>
