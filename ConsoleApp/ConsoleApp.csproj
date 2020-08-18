@@ -1,12 +1,25 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>
+	<PropertyGroup>
+		<UseNETCoreGenerator>true</UseNETCoreGenerator>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>netstandard2.0</TargetFramework>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\EnumGenerator\EnumGenerator.csproj" />
-  </ItemGroup>
+	<Target Name="MyTasksAfterbuild" AfterTargets="AfterBuild">
+		<Message Text="(ConsoleApp) MSBuildThisFileDirectory: '$(MSBuildThisFileDirectory)'" Importance="High" />
+		<Message Text="(ConsoleApp) ReferencePath: '@(ReferencePath)'" Importance="High" />
+		<Message Text="(ConsoleApp) IntermediateAssembly: '@(IntermediateAssembly)'" Importance="High" />
+		<Message Text="(ConsoleApp) MSBuildProjectDirectory: '$(MSBuildProjectDirectory)'" Importance="High" />
+		<Message Text="(ConsoleApp) MSBuildProjectFullPath: '$(MSBuildProjectFullPath)'" Importance="High" />
+		<Message Text="(ConsoleApp) MSBuildProjectFullPath: '$(ProjectDir)'" Importance="High" />
+		<Message Text="(ConsoleApp) MSBuildRuntimeType: '$(MSBuildRuntimeType)'" Importance="High" />
+	</Target>
 
+	<ItemGroup>
+	  <PackageReference Include="CustomTask" Version="0.0.0.1">
+	    <PrivateAssets>all</PrivateAssets>
+	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	  </PackageReference>
+	</ItemGroup>
 </Project>

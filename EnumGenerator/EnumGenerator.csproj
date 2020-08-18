@@ -1,25 +1,35 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>
-
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.0</TargetFrameworks>
+	</PropertyGroup>
 	<ItemGroup>
-		<DotNetCliToolReference Include="dotnet-t4-project-tool" Version="2.0.5" />
-		<PackageReference Include="Mono.TextTemplating" Version="2.0.5" />
-		<TextTemplate Include="**\*.tt" />
-		<Generated Include="**\*.Generated.cs" />
+		<Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
 	</ItemGroup>
 	
-  <ItemGroup>
-    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
-  </ItemGroup>
-
-	<Target Name="TextTemplateTransform" BeforeTargets="BeforeBuild">
+	<!--<Target Name="TextTemplateTransform" BeforeTargets="BeforeBuild">
 		<Exec WorkingDirectory="$(ProjectDir)" Command="dotnet t4 %(TextTemplate.Identity) -c $(RootNameSpace).%(TextTemplate.Filename) -o %(TextTemplate.Filename).Generated.cs" />
 	</Target>
-
 	<Target Name="TextTemplateClean" AfterTargets="Clean">
 		<Delete Files="@(Generated)" />
-	</Target>
+	</Target>-->
+	
+	<ItemGroup>
+	  <PackageReference Include="System.CodeDom" Version="4.7.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="EnumGenerator.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>EnumGenerator.tt</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="EnumGenerator.tt">
+	    <Generator>TextTemplatingFilePreprocessor</Generator>
+	    <LastGenOutput>EnumGenerator.cs</LastGenOutput>
+	  </None>
+	</ItemGroup>
+
 </Project>

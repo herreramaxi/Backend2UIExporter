@@ -1,0 +1,25 @@
+﻿<!-- 
+  This file is automatically imported by NuGet into a user's project
+  when it targets a single framework, or in classic (pre 2017) csproj projects.
+-->
+<Project TreatAsLocalProperty="TaskAssembly">
+	<PropertyGroup>
+		<!--<TaskAssembly>$(MSBuildThisFileDirectory)..\$(TaskFolder)\EnumGenerator.dll</TaskAssembly>-->
+		<TaskAssembly>$(MSBuildThisFileDirectory)CustomTaskLibrary.dll</TaskAssembly>
+	</PropertyGroup>
+
+	<UsingTask TaskName="CustomTaskLibrary.CustomTask" AssemblyFile="$(TaskAssembly)" />
+
+	<Target Name="MyTasksBeforebuild" AfterTargets="BeforeBuild">
+		<Message Text="(ConsoleApp) MSBuildThisFileDirectory: '$(MSBuildThisFileDirectory)'" Importance="High" />
+		<Message Text="(ConsoleApp) ReferencePath: '@(ReferencePath)'" Importance="High" />
+		<Message Text="(ConsoleApp) IntermediateAssembly: '@(IntermediateAssembly)'" Importance="High" />
+		<Message Text="(ConsoleApp) MSBuildProjectDirectory: '$(MSBuildProjectDirectory)'" Importance="High" />
+		<Message Text="(ConsoleApp) MSBuildProjectFullPath: '$(MSBuildProjectFullPath)'" Importance="High" />
+		<Message Text="(ConsoleApp) MSBuildRuntimeType: '$(MSBuildRuntimeType)'" Importance="High" />
+	</Target>
+
+	<Target Name="CustomTask" AfterTargets="AfterBuild">
+		<CustomTask  AssemblyFile="@(IntermediateAssembly)" ProjectPath ="$(MSBuildProjectDirectory)"/>
+	</Target>
+</Project>

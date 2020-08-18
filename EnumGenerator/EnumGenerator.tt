@@ -1,12 +1,12 @@
 ﻿<#@ template language="C#" #>
-<#@ assembly name="System" #>
+<#@ assembly name="System.Core" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Reflection" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#
 var enumTypes = new List<Type>();
-_assemblies.ForEach(x => enumTypes.AddRange(x.GetTypes().Where(x => x.IsEnum)));
+_assemblies.ForEach(a => enumTypes.AddRange(a.GetTypes().Where(t => t.IsEnum)));
          
 foreach (var enumType in enumTypes)
 {   
