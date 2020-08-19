@@ -1,9 +1,11 @@
-﻿using System;
+﻿using CustomTaskLibrary;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace ConsoleApp
 {
+    [EnumTBE]
     public enum Enum2
     {
         A = 1,

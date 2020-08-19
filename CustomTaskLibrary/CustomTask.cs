@@ -24,16 +24,29 @@ namespace CustomTaskLibrary
             Log.LogMessage(MessageImportance.High, $"assemblyPath: {assemblyPath}");
 
 
-            //using var stream = File.OpenRead(assemblyPath);
-            // Log.LogMessage(MessageImportance.High, $"isNotNullStream?: {stream != null}");
-            //var assembly = new IsolatedAssemblyLoadContext().LoadFromStream(stream);
+            
 
             try
             {
                 Log.LogMessage("Entering try-catch");
+
+
+                //DomainAssemblyResolver.Connect();
+                //using var stream = File.OpenRead(assemblyPath);
+                //Log.LogMessage(MessageImportance.High, $"isNotNullStream?: {stream != null}");
+                //var assembly = new IsolatedAssemblyLoadContext().LoadFromStream(stream);
+
                 var assembly = Assembly.LoadFile(assemblyPath);
                 Log.LogMessage(MessageImportance.High, $"isNotNull assembly?: {assembly != null}");
-                Log.LogMessage(MessageImportance.High, $"Loaded: {string.Join("#", assembly.GetTypes().Select(x => x.Name))}");
+
+                var enumTypes = assembly.GetTypes()
+                                        .Where(t => t.GetCustomAttribute<EnumTBEAttribute>() != null)
+                                        .ToArray();
+
+                Log.LogMessage(MessageImportance.High, $"Loaded: {string.Join("#", enumTypes.Select(x => x.Name)) }");
+
+                var script = new EnumGenerator.EnumGenerator(enumTypes).TransformText();
+                Log.LogMessage(MessageImportance.High, $"Script: {script}");
             }
             catch (ReflectionTypeLoadException refEx)
             {

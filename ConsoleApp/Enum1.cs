@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using CustomTaskLibrary;
 
 namespace ConsoleApp
 {
+    [EnumTBE]
     public enum Enum1
     {
         codeA,

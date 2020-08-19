@@ -32,10 +32,8 @@ namespace EnumGenerator
             
             #line 7 "C:\dev\Backend2UIExporter\EnumGenerator\EnumGenerator.tt"
 
-var enumTypes = new List<Type>();
-_assemblies.ForEach(a => enumTypes.AddRange(a.GetTypes().Where(t => t.IsEnum)));
          
-foreach (var enumType in enumTypes)
+foreach (var enumType in _types.Where(t => t.IsEnum))
 {   
     WriteLine($"enum {enumType.Name}");
     WriteLine("{");
