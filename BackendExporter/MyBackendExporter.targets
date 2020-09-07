@@ -10,7 +10,7 @@
 
 	<!--<CustomTask  AssemblyFile="@(IntermediateAssembly)" ProjectPath ="$(MSBuildProjectDirectory)" References="@(ReferencePath)"/>-->
 	<Target Name="BackendExporter" AfterTargets="CoreCompile">
-		<Exec Command="$(TsGenFileExe) @(IntermediateAssembly) $(MSBuildProjectDirectory)" />
+		<Exec Command="$(TsGenFileExe) $(MSBuildProjectDirectory) @(IntermediateAssembly)" />
 		<!--<Exec Command="$(TsGenFileExe) $(TargetPathWithTargetPlatformMoniker) $(TypescriptOutput) namespace $(NamespaceFilter)" />-->
 	</Target>
 </Project>
