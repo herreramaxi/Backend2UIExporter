@@ -1,9 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFrameworks>netstandard2.0</TargetFrameworks>
+		<TargetFrameworks>netcoreapp2.0;netstandard2.0;net461</TargetFrameworks>
+		<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+		<OutputType>Library</OutputType>	
 	</PropertyGroup>
 	<ItemGroup>
-		<Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+	  <PackageReference Include="System.CodeDom" Version="4.7.0" />
 	</ItemGroup>
 	
 	<!--<Target Name="TextTemplateTransform" BeforeTargets="BeforeBuild">
@@ -12,10 +14,6 @@
 	<Target Name="TextTemplateClean" AfterTargets="Clean">
 		<Delete Files="@(Generated)" />
 	</Target>-->
-	
-	<ItemGroup>
-	  <PackageReference Include="System.CodeDom" Version="4.7.0" />
-	</ItemGroup>
 
 	<ItemGroup>
 	  <Compile Update="EnumGenerator.cs">
@@ -31,5 +29,4 @@
 	    <LastGenOutput>EnumGenerator.cs</LastGenOutput>
 	  </None>
 	</ItemGroup>
-
 </Project>

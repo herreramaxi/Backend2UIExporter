@@ -4,6 +4,8 @@ using System.Reflection;
 
 namespace EnumGenerator
 {
+    //TODO: Multitargeting
+    //TODO: To be renamed becuase I will generate not only enum scripts but also DTO objects
     public partial class EnumGenerator //: ITextTemplate
     {
         private Type[] _types;

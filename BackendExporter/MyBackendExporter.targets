@@ -1,0 +1,16 @@
+﻿<Project>
+	<PropertyGroup>		
+		<TsGenFileExe Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">"$(MSBuildThisFileDirectory)/net461/be-generator.exe"</TsGenFileExe>
+		<!--<TsGenFileExe Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp' OR '$(TargetFrameworkIdentifier)' == '.NETStandard'">dotnet "$(MSBuildThisFileDirectory)/netcoreapp2.0/be-generator.dll"</TsGenFileExe>-->
+		<TsGenFileExe Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'">dotnet "$(MSBuildThisFileDirectory)/netcoreapp2.0/be-generator.dll"</TsGenFileExe>
+		<TsGenFileExe Condition="'$(TargetFrameworkIdentifier)' == '.NETStandard'">dotnet "$(MSBuildThisFileDirectory)/netstandard2.0/be-generator.dll"</TsGenFileExe>
+		<TypescriptOutput>"$(MSBuildProjectDir)/wwwroot/ts-gen/"</TypescriptOutput>
+		<NamespaceFilter>$(RootNamespace).Typescript</NamespaceFilter>
+	</PropertyGroup>	
+
+	<!--<CustomTask  AssemblyFile="@(IntermediateAssembly)" ProjectPath ="$(MSBuildProjectDirectory)" References="@(ReferencePath)"/>-->
+	<Target Name="BackendExporter" AfterTargets="CoreCompile">
+		<Exec Command="$(TsGenFileExe) @(IntermediateAssembly) $(MSBuildProjectDirectory)" />
+		<!--<Exec Command="$(TsGenFileExe) $(TargetPathWithTargetPlatformMoniker) $(TypescriptOutput) namespace $(NamespaceFilter)" />-->
+	</Target>
+</Project>

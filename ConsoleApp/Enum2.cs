@@ -1,9 +1,4 @@
-﻿using CustomTaskLibrary;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ConsoleApp
+﻿namespace ConsoleApp
 {
     [EnumTBE]
     public enum Enum2

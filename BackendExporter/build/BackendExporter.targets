@@ -1,0 +1,16 @@
+﻿<Project>
+	<!--<PropertyGroup>
+		<TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);CustomContentTarget</TargetsForTfmSpecificContentInPackage>
+	</PropertyGroup>-->
+	<Import Project="$(MSBuildThisFileDirectory)/../../tools/MyBackendExporter.targets" />
+
+	<!--<Target Name="CustomContentTarget">
+		<PropertyGroup>
+			<RefPath  Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">ref/netstandard2.0</RefPath>
+			<RefPath  Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp' OR '$(TargetFrameworkIdentifier)' == '.NETStandard'">ref/netcoreapp2.0</RefPath>
+		</PropertyGroup>
+		<ItemGroup>
+			<TfmSpecificPackageFile Include="EnumGenerator.dll" PackagePath="$(RefPath)"/>
+		</ItemGroup>
+	</Target>-->
+</Project>

@@ -1,5 +1,4 @@
-﻿using CustomTaskLibrary;
-
+﻿//using EnumGenerator;
 namespace ConsoleApp
 {
     [EnumTBE]

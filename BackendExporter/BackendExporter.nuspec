@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+	<metadata>
+		<id>BackendExporter</id>
+		<version>1.0.3</version>
+		<authors>Max</authors>
+		<description>Generates typescript from .NET Types</description>
+		<!--<references>			
+			<reference file="EnumGenerator.dll"></reference>
+		</references>-->
+	</metadata>
+	<files>
+		<file src="_._" target="lib/netstandard1.0/" />
+		<file src="_._" target="lib/net45/" />
+		<file src="build/BackendExporter.targets" target="build/netstandard1.0/BackendExporter.targets" />
+		<file src="build/BackendExporter.targets" target="build/net45/BackendExporter.targets" />
+
+		<file src="$publishdir$\net461\EnumGenerator.*" target="lib/net461" />
+		<file src="$publishdir$\net461\EnumGenerator.*" target="ref/net461" />
+		
+		<file src="$publishdir$\netcoreapp2.0\EnumGenerator.*" target="lib/netcoreapp2.0" />	  
+		<file src="$publishdir$\netcoreapp2.0\EnumGenerator.*" target="ref/netcoreapp2.0" />
+
+		<file src="$publishdir$\netstandard2.0\EnumGenerator.*" target="lib/netstandard2.0" />
+		<file src="$publishdir$\netstandard2.0\EnumGenerator.*" target="ref/netstandard2.0" />
+		
+		<file src="MyBackendExporter.targets" target="tools/" />
+		<file src="$publishdir$\net461\**\*" target="tools/net461/" />
+		<file src="$publishdir$\netcoreapp2.0\**\*" target="tools/netcoreapp2.0/" />
+		<file src="$publishdir$\netstandard2.0\**\*" target="tools/netstandard2.0/" />
+	</files>
+</package>
