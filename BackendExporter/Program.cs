@@ -9,7 +9,7 @@ namespace BackendExporter
     {
         static void Main(string[] args)
         {
-            //TODO: it is pending to handle parameters and load assembly
+            //TODO: it is pending to handle parameters
             var projectPath = args[0];
             var assemblyFile = args[1];
             Console.WriteLine($"projectPath: {projectPath}");
@@ -18,7 +18,10 @@ namespace BackendExporter
             var assemblyPath = Path.Combine(projectPath, assemblyFile);
             Console.WriteLine($"assemblyPath: {assemblyPath}");
 
-            //var configFile = ConfigurationFileFinder.Find(projectPath);
+            var configFile = ConfigurationFileFinder.Find(projectPath);
+            
+            if (configFile.IsDefault) return;
+
             var assembly = Assembly.LoadFile(assemblyPath);
             var enumTypes = assembly.GetTypes()
                                      .Where(t => t.GetCustomAttribute<EnumTBEAttribute>() != null)
@@ -26,6 +29,16 @@ namespace BackendExporter
             var script = new EnumGenerator.EnumGenerator(enumTypes).TransformText();
             Console.WriteLine("script:");
             Console.WriteLine(script);
+                        
+            var ouputPath = Path.Combine(configFile.UIProjectPath, configFile.EnumFileName);
+            Console.WriteLine($"ouputPath: {ouputPath}");
+
+            if (!Directory.Exists(configFile.UIProjectPath))
+            {
+                Directory.CreateDirectory(configFile.UIProjectPath);
+            }
+
+            File.WriteAllText(ouputPath, script);
         }
     }
 }

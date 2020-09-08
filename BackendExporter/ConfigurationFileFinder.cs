@@ -40,6 +40,7 @@ namespace BackendExporter
             {
                 var configFileText = File.ReadAllText(path);
                 configFile = JsonConvert.DeserializeObject<ConfigurationFile>(configFileText);
+                configFile.IsDefault = false;
 
                 Console.WriteLine($"Config file: {configFileText}");
             }
